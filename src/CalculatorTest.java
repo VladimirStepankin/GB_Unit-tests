@@ -1,5 +1,6 @@
 import seminars.first.model.Calculator;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -49,7 +50,29 @@ public class CalculatorTest {
                 Calculator.calculation(8, 4, '_')
         ).isInstanceOf(IllegalStateException.class);
 
-        System.out.println(Calculator.calculation(2_147_483_647, 1, '+')); // integer overflow
-        System.out.println(Calculator.squareRootExtraction(169));
+//        System.out.println(Calculator.calculation(2_147_483_647, 1, '+')); // integer overflow
+//        System.out.println(Calculator.squareRootExtraction(169));
+
+        // Тесты ДЗ
+        // Проверка корректного расчета скидки
+        assertThat(Calculator.calculatingDiscount(100.0, 10.0)).isEqualTo(90.0);
+        assertThat(Calculator.calculatingDiscount(200.0, 20.0)).isEqualTo(160.0);
+
+        // Проверка исключения при отрицательной сумме покупки
+        assertThatThrownBy(() -> Calculator.calculatingDiscount(-100.0, 10.0))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("Invalid arguments");
+
+        // Проверка исключения при отрицательном проценте скидки
+        assertThatThrownBy(() -> Calculator.calculatingDiscount(100.0, -10.0))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("Invalid arguments");
+
+        // Проверка исключения при проценте скидки больше 100
+        assertThatThrownBy(() -> Calculator.calculatingDiscount(100.0, 110.0))
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("Invalid arguments");
+
+        System.out.println(Calculator.calculatingDiscount(-100, 10));
     }
 }

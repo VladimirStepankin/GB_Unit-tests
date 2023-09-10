@@ -4,6 +4,11 @@ public class Product {
     private int cost; // Стоимость продукта
     private String title; // Название
 
+    public Product(String title, int cost) {
+        this.title = title;
+        this.cost = cost;
+    }
+
     public int getCost() {
         return cost;
     }

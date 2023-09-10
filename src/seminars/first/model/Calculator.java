@@ -52,8 +52,12 @@ public class Calculator {
      * @param discountAmount размер скидки
      * @return возвращает сумму покупки с учетом скидки
      */
-    public static double calculatingDiscount(double purchaseAmount, int discountAmount) {
+    public static double calculatingDiscount(double purchaseAmount, double discountAmount) {
+        if (purchaseAmount < 0 || discountAmount < 0 || discountAmount > 100) {
+            throw new ArithmeticException("Invalid arguments");
+        }
 
-        return 0;
+        double discount = purchaseAmount * (discountAmount / 100);
+        return purchaseAmount - discount;
     }
 }
